@@ -1,0 +1,7 @@
+C:\Demo\repo\SalseoLoader\SalseoLoader\SalseoLoader\bin\Debug\SalseoLoader.exe.config
+C:\Demo\repo\SalseoLoader\SalseoLoader\SalseoLoader\bin\Debug\SalseoLoader.exe
+C:\Demo\repo\SalseoLoader\SalseoLoader\SalseoLoader\bin\Debug\SalseoLoader.pdb
+C:\Demo\repo\SalseoLoader\SalseoLoader\SalseoLoader\obj\Debug\SalseoLoader.csprojAssemblyReference.cache
+C:\Demo\repo\SalseoLoader\SalseoLoader\SalseoLoader\obj\Debug\SalseoLoader.csproj.CoreCompileInputs.cache
+C:\Demo\repo\SalseoLoader\SalseoLoader\SalseoLoader\obj\Debug\SalseoLoader.exe
+C:\Demo\repo\SalseoLoader\SalseoLoader\SalseoLoader\obj\Debug\SalseoLoader.pdb

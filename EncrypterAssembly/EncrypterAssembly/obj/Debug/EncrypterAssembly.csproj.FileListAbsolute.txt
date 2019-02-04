@@ -1,0 +1,6 @@
+C:\Demo\repo\EncrypterAssembly\EncrypterAssembly\EncrypterAssembly\obj\Debug\EncrypterAssembly.csprojAssemblyReference.cache
+C:\Demo\repo\EncrypterAssembly\EncrypterAssembly\EncrypterAssembly\obj\Debug\EncrypterAssembly.csproj.CoreCompileInputs.cache
+C:\Demo\repo\EncrypterAssembly\EncrypterAssembly\EncrypterAssembly\bin\Debug\EncrypterAssembly.exe
+C:\Demo\repo\EncrypterAssembly\EncrypterAssembly\EncrypterAssembly\bin\Debug\EncrypterAssembly.pdb
+C:\Demo\repo\EncrypterAssembly\EncrypterAssembly\EncrypterAssembly\obj\Debug\EncrypterAssembly.exe
+C:\Demo\repo\EncrypterAssembly\EncrypterAssembly\EncrypterAssembly\obj\Debug\EncrypterAssembly.pdb

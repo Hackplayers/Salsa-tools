@@ -1,0 +1,6 @@
+C:\Users\Luis\Documents\SharpDevelop Projects\Encripter\Encripter\bin\Debug\Encripter.exe
+C:\Users\Luis\Documents\SharpDevelop Projects\Encripter\Encripter\bin\Debug\Encripter.pdb
+C:\Users\Luis\Documents\SharpDevelop Projects\Encripter\Encripter\obj\Debug\Encripter.exe
+C:\Users\Luis\Documents\SharpDevelop Projects\Encripter\Encripter\obj\Debug\Encripter.pdb
+C:\Users\Luis\Documents\SharpDevelop Projects\Encripter\Encripter\obj\Debug\Encripter.csprojAssemblyReference.cache
+C:\Users\Luis\Documents\SharpDevelop Projects\Encripter\Encripter\obj\Debug\Encripter.csproj.CoreCompileInputs.cache

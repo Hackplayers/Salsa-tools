@@ -1,0 +1,9 @@
+C:\Users\Luis\Documents\SharpDevelop Projects\libreria\libreria\bin\Debug\SalseoLoader.dll
+C:\Users\Luis\Documents\SharpDevelop Projects\libreria\libreria\bin\Debug\SalseoLoader.pdb
+C:\Users\Luis\Documents\SharpDevelop Projects\libreria\libreria\obj\Debug\SalseoLoader.dll
+C:\Users\Luis\Documents\SharpDevelop Projects\libreria\libreria\obj\Debug\SalseoLoader.pdb
+C:\Users\Luis\Documents\SharpDevelop Projects\libreria\libreria\obj\Debug\libreria.csprojAssemblyReference.cache
+C:\Users\Luis\Documents\SharpDevelop Projects\libreria\libreria\obj\Debug\libreria.csproj.CoreCompileInputs.cache
+C:\temp\SalseoLoader.dll
+C:\temp\SalseoLoader.pdb
+C:\Users\Luis\Documents\SharpDevelop Projects\libreria\libreria\obj\Debug\libreria.csproj.CopyComplete
