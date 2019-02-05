@@ -1,6 +1,7 @@
 ﻿/*
  * Created by SharpDevelop.
- * User: Luis
+ * User: CyberVaca 
+ * Twitter: https://twitter.com/CyberVaca_
  * Date: 10/11/2018
  * Time: 0:05
  * 
