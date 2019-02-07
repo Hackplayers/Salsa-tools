@@ -294,7 +294,6 @@ Console.ForegroundColor = ConsoleColor.White;
             MemoryStream ms = new MemoryStream();
             using (WebClient client = new WebClient())
             {
-                //Access web and read the bytes from the binary file
                 System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls; 
                 ms = new MemoryStream(client.DownloadData(http));
                 BinaryReader br = new BinaryReader(ms);
