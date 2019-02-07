@@ -1,9 +1,8 @@
 ﻿/*
  * Creado por SharpDevelop.
- * Usuario: CyberVaca
- * Fecha: 23/10/2018
- * Hora: 22:49
- * 
+ * User: CyberVaca 
+ * Twitter: https://twitter.com/CyberVaca_
+ * Date: 10/11/2018
  * Para cambiar esta plantilla use Herramientas | Opciones | Codificación | Editar Encabezados Estándar
  */
 using System;
@@ -41,7 +40,7 @@ string banner = @"
                                        __/ |   
                                       |___/    
   
-				By: CyberVaca
+				By: CyberVaca@HackPlayers
                                                                      
 
 ";
