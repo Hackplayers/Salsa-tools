@@ -91,16 +91,8 @@ byte[] XPay = System.IO.File.ReadAllBytes(target_dll);
 //------------------------------------------------------//
 byte[] movida_encriptada = RC4.Encrypt(futurakey,XPay);
 string hexadecimal = BiteArrayToHex.Convierte(movida_encriptada);
-string cabeshahex = BiteArrayToHex.Convierte(futurakey);
-Console.WriteLine("cabesha en HEX");
-Console.WriteLine(cabeshahex);
 string base64 = Zipea.Comprime(hexadecimal);
 System.IO.File.WriteAllText(path,base64);
-Console.WriteLine("archivo encriptado ");
-Console.WriteLine(hexadecimal);
-Console.WriteLine(base64);
-Console.WriteLine("movida encriptada");
-Console.WriteLine();
 Console.WriteLine("[+] Archivo guardado en: " + path);
 Console.ForegroundColor = ConsoleColor.White;
         }
