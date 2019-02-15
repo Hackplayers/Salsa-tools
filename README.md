@@ -78,3 +78,28 @@ AMSI Bypass Redux (CyberArk) https://www.cyberark.com/threat-research-blog/amsi-
 AMSI Bypass (Rastamouse) https://rastamouse.me/2018/11/amsiscanbuffer-bypass---part-3/  
 
 
+```
+  _____  ____  _     _____   ___   ___    
+ / ___/ /    || |   / ___/  /  _] /   \   
+(   \_ |  o  || |  (   \_  /  [_ |     |  
+ \__  ||     || |___\__  ||    _]|  O  |  
+ /  \ ||  _  ||     /  \ ||   [_ |     |  
+ \    ||  |  ||     \    ||     ||     |  
+  \___||__|__||_____|\___||_____| \___/   
+                                          
+ _       ___    ____  ___      ___  ____  
+| |     /   \  /    ||   \    /  _]|    \ 
+| |    |     ||  o  ||    \  /  [_ |  D  )
+| |___ |  O  ||     ||  D  ||    _]|    / 
+|     ||     ||  _  ||     ||   [_ |    \ 
+|     ||     ||  |  ||     ||     ||  .  \
+|_____| \___/ |__|__||_____||_____||__|\_|
+
+[+] This software is the one that we will use to load the encrypted payload
+```
+
+# Description
+
+This software is the one that we will use to load the encrypted payload. SalseoLoader can be compiled as a library or as an executable. In the case that it is compiled as executable, we must only pass the argument that we want to execute. On the contrary, if we compile it as a library. We will have to make an export of the descriptor "main". And the way to create the argument, is done through the reading of environmental variables.
+
+# Usage SalseoLoader in .EXE
