@@ -104,7 +104,5 @@ This software is the one that we will use to load the encrypted payload. SalseoL
 
 # Usage SalseoLoader in .EXE reading the payload from a web server
 
-```
 ![](https://github.com/Hackplayers/Salsa-tools/blob/master/images/example1.png)
 
-```
