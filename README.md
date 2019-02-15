@@ -74,6 +74,7 @@ EvilSalsa is our payload. Basically what we do is load the System.Management.Aut
 
 AMSI Bypass Redux | CyberArk
 https://www.cyberark.com/threat-research-blog/amsi-bypass-redux/
+
 AMSI Bypass Rastamouse
 https://rastamouse.me/2018/11/amsiscanbuffer-bypass---part-3/
 
