@@ -34,13 +34,13 @@ Salsa Toos is a set of tools written in C # that allows you to have a shellrever
  [+] Software that encrypts the payload using RC4
  [+] We have the version in python and the version in .exe
 ```
-# Usage in python
+# Usage EncrypterAssembly in python
 
 ```
 python encrypterassembly.py <FILE> <PASSWORD> <OUTPUT>
 ```
 
-# Usage in .EXE
+# Usage EncrypterAssembly in .EXE
 
 ```
 Encrypterassembly.exe <FILE> <PASSWORD> <OUTPUT>
