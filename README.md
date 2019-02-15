@@ -16,7 +16,8 @@
  [+] EvilSalsa (This is our payload)
  [+] SalseoLoader (Software that we will use to load our encrypted payload)
 ```
-Salsa Toos is a set of tools written in C # that allows you to have a shellreverse in any windows environment without needing powershell for its execution.
+Salsa Toos is a set of tools written in C #  
+that allows you to have a shellreverse in any windows environment without the need of powershell for it's execution.  
 
 
 ```
