@@ -45,3 +45,4 @@ python encrypterassembly.py <FILE> <PASSWORD> <OUTPUT>
 ```
 Encrypterassembly.exe <FILE> <PASSWORD> <OUTPUT>
 ```
+![](https://github.com/Hackplayers/Salsa-tools/blob/master/images/encrypterpython.png)
