@@ -1,7 +1,7 @@
 ![License](https://img.shields.io/badge/license-GNU-green.svg?style=flat-square)
 
 # **Salsa Tools - ShellReverse**
-## **TCP/UDP/ICMP/DNS and AV bypass, AMSI patched**
+## **TCP/UDP/ICMP/DNS and AV bypass, patched AMSI**
 
 ```
    _____       __              ______            __    
@@ -16,8 +16,7 @@
  [+] EvilSalsa (This is our payload)
  [+] SalseoLoader (Software that we will use to load our encrypted payload)
 ```
-Salsa Toos is a set of tools written in C #  
-that allows you to have a shellreverse in any windows environment without the need of powershell for it's execution.  
+Salsa Tools is a set of tools written in C# that allows you to have a shell reverse in any windows environment without the need of powershell for it's execution.  
 
 
 ```
@@ -73,7 +72,7 @@ Encrypterassembly.exe <FILE> <PASSWORD> <OUTPUT>
 ```
 ## Description
 
-EvilSalsa is our payload. Basically what we do is load the System.Management.Automation .dll. Create a runspace and within that runspaces we have four types of shells (TCP / UDP / ICMP / DNS). When the EvilSalsa is loaded into the system, the first thing it does is to check if "c:\windows\system32\amsi.dll" is found in the system. If it is in the system, it is patched: D. Patching is a patch variant of CyberArk and Rastamouse.
+EvilSalsa is our payload. Basically what we do is loading the System.Management.Automation .dll. Create a runspace and within that runspaces we have four types of shells (TCP / UDP / ICMP / DNS). When the EvilSalsa is loaded into the system, the first thing it does is to check if "c:\windows\system32\amsi.dll" is found in the system. If it is in the system, it is patched: D. Patching is a patch variant of CyberArk and Rastamouse.
 
 AMSI Bypass Redux (CyberArk) https://www.cyberark.com/threat-research-blog/amsi-bypass-redux/  
 AMSI Bypass (Rastamouse) https://rastamouse.me/2018/11/amsiscanbuffer-bypass---part-3/  
