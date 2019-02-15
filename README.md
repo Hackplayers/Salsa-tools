@@ -46,3 +46,24 @@ python encrypterassembly.py <FILE> <PASSWORD> <OUTPUT>
 Encrypterassembly.exe <FILE> <PASSWORD> <OUTPUT>
 ```
 ![](https://github.com/Hackplayers/Salsa-tools/blob/master/images/encrypterpython.png)
+
+```
+   ___ __ __  ____  _            
+  /  _]  |  ||    || |           
+ /  [_|  |  | |  | | |           
+|    _]  |  | |  | | |___        
+|   [_|  :  | |  | |     |       
+|     |\   /  |  | |     |       
+|_____| \_/  |____||_____|       
+                                 
+  _____  ____  _     _____  ____ 
+ / ___/ /    || |   / ___/ /    |
+(   \_ |  o  || |  (   \_ |  o  |
+ \__  ||     || |___\__  ||     |
+ /  \ ||  _  ||     /  \ ||  _  |
+ \    ||  |  ||     \    ||  |  |
+  \___||__|__||_____|\___||__|__|
+                                 
+```
+
+
