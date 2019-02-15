@@ -29,5 +29,6 @@
                                           |___/   
 			  
  [+] Software that encrypts the payload using RC4
+ [+] We have the version in python and the version in .exe
 ```
-
+Salsa Toos is a set of tools written in C # that allows you to have a shellreverse in any windows environment without needing powershell for its execution.
