@@ -66,6 +66,8 @@ Encrypterassembly.exe <FILE> <PASSWORD> <OUTPUT>
  /  \ ||  _  ||     /  \ ||  _  |
  \    ||  |  ||     \    ||  |  |
   \___||__|__||_____|\___||__|__|
+  
+[+] That is our Payload
                                  
 ```
 # Description
