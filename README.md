@@ -1,7 +1,7 @@
 ![License](https://img.shields.io/badge/license-GNU-green.svg?style=flat-square)
 
 # **Salsa Tools - ShellReverse**
-## **TCP/UDP/ICMP/ DNS and AV bypass, AMSI patched**
+## **TCP/UDP/ICMP/DNS and AV bypass, AMSI patched**
 
 ```
    _____       __              ______            __    
