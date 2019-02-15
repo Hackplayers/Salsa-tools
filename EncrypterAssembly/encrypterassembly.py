@@ -19,7 +19,7 @@ banner = """
                                            __/ |  
                                           |___/   
 									
-									by: CyberVaca@HackPlayers
+				by: CyberVaca@HackPlayers
 """
 
 print banner
