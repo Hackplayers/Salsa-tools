@@ -72,9 +72,7 @@ Encrypterassembly.exe <FILE> <PASSWORD> <OUTPUT>
 
 EvilSalsa is our payload. Basically what we do is load the System.Management.Automation .dll. Create a runspace and within that runspaces we have four types of shells (TCP / UDP / ICMP / DNS). When the EvilSalsa is loaded into the system, the first thing it does is to check if "c:\windows\system32\amsi.dll" is found in the system. If it is in the system, it is patched: D. Patching is a patch variant of CyberArk and Rastamouse.
 
-AMSI Bypass Redux (CyberArk)  
-https://www.cyberark.com/threat-research-blog/amsi-bypass-redux/  
-AMSI Bypass (Rastamouse)  
-https://rastamouse.me/2018/11/amsiscanbuffer-bypass---part-3/  
+AMSI Bypass Redux (CyberArk) https://www.cyberark.com/threat-research-blog/amsi-bypass-redux/  
+AMSI Bypass (Rastamouse) https://rastamouse.me/2018/11/amsiscanbuffer-bypass---part-3/  
 
 
