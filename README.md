@@ -8,7 +8,7 @@
 /____/\__,_/_/____/\__,_/    /_/  \____/\____/_/____/  
 
 ```
-# **Salsa Tools - An AV-Safe Reverse Shell dipped on bellota sauce   **
+# **Salsa Tools - An AV-Safe Reverse Shell dipped on bellota sauce  
 
 Salsa Tools is a collection of three different tools that combined, allows you to get a reverse shell on steroids in any Windows environment without even needing PowerShell for it's execution. In order to avoid the latest detection techniques (AMSI), most of the components were initially written on C#. Salsa Tools was publicly released by Luis Vacas during his Talk “Inmersión en la explotación tiene rima” which took place during h-c0n in 9th February 2019.
 
