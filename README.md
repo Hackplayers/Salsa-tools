@@ -14,7 +14,7 @@ Salsa Tools is a collection of three different tools that combined, allows you t
 
 
 ## Features
-    * TCP/UDP/ICMP/DNS     
+    * TCP/UDP/ICMP/DNS/BIND     
     * AV Safe (17th February)
     * AMSI patchers
     * PowerShell execution 
@@ -57,7 +57,7 @@ And his behavior is as it follows:
                                  
 ```
 
-EvilSalsa is the key ingredient of this recipe. It contains the payload, which is executed on the system as it follows: as soon as the payloads starts, it runs `System.Management.Automation.dll` which creates a runspace . Within that runspace we have four types of shells (TCP / UDP / ICMP / DNS). Once EvilSalsa is loaded, first thing first, the existence of `c:\windows\system32\amsi.dll` is checked. If it exists, it is patched using a home-cooked variant of CyberArk and Rastamouse bypasses.
+EvilSalsa is the key ingredient of this recipe. It contains the payload, which is executed on the system as it follows: as soon as the payloads starts, it runs `System.Management.Automation.dll` which creates a runspace . Within that runspace we have four types of shells (TCP / UDP / ICMP / DNS / BINDTCP). Once EvilSalsa is loaded, first thing first, the existence of `c:\windows\system32\amsi.dll` is checked. If it exists, it is patched using a home-cooked variant of CyberArk and Rastamouse bypasses.
 
 
 #### Mixing EncrypterAssembly and Evilsalsa
