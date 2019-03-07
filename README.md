@@ -108,11 +108,11 @@ You can **select the architecture** inside Visual Studio in the **left "Build" T
 
 (If you can't find this options press in "**Project Tab**" and then in "**<Project-Name> Properties**")
 
-![](https://github.com/carlospolop-forks/Salsa-tools/blob/master/images/imagen1.png)
+![](https://github.com/Hackplayers/Salsa-tools/blob/master/images/imagen1.png)
 
 Then, build both projects (Build -> Build Solution) (Inside the logs will appear the path of the executable):
 
-![](https://github.com/carlospolop-forks/Salsa-tools/blob/master/images/imagen2.png)
+![](https://github.com/Hackplayers/Salsa-tools/blob/master/images/imagen2.png)
 
 ## Prepare the Backdoor
 
@@ -175,17 +175,17 @@ Open the SalseoLoader project using Visual Studio.
 
 Before the main function add this line: \[DllExport\]
 
-![](https://github.com/carlospolop-forks/Salsa-tools/blob/master/images/imagen3.png)
+![](https://github.com/Hackplayers/Salsa-tools/blob/master/images/imagen3.png)
 
 ### Install DllExport for this project
 
 **Tools --> NuGet Package Manager --> Manage NuGet Packages for Solution...**
 
-![](https://github.com/carlospolop-forks/Salsa-tools/blob/master/images/imagen4.png)
+![](https://github.com/Hackplayers/Salsa-tools/blob/master/images/imagen4.png)
 
 **Search for DllExport package (using Browse tab), and press Install (and accept the popup)**
 
-![](https://github.com/carlospolop-forks/Salsa-tools/blob/master/images/imagen5.png)
+![](https://github.com/Hackplayers/Salsa-tools/blob/master/images/imagen5.png)
 
 In your project folder have appeared the files: **DllExport.bat** and **DllExport_Configure.bat**
 
@@ -193,7 +193,7 @@ In your project folder have appeared the files: **DllExport.bat** and **DllExpor
 
 Press **Uninstall** (yeah, its weird but trust me, it is necessary)
 
-![](https://github.com/carlospolop-forks/Salsa-tools/blob/master/images/imagen6.png)
+![](https://github.com/Hackplayers/Salsa-tools/blob/master/images/imagen6.png)
 
 ### Exit Visual Studio and execute DllExport_configure
 
@@ -202,21 +202,21 @@ Just **exit** Visual Studio
 Then, go to your **SalseoLoader folder** and **execute DllExport_Configure.bat**
 Select **x64** (if you are going to use it inside a x64 box, that was my case), select **System.Runtime.InteropServices** (inside **Namespace for DllExport**) and press **Apply**
 
-![](https://github.com/carlospolop-forks/Salsa-tools/blob/master/images/imagen7.png)
+![](https://github.com/Hackplayers/Salsa-tools/blob/master/images/imagen7.png)
 
 ### Open the project again with visual Studio
 **\[DllExport\]** should not be longer marked as error
 
-![](https://github.com/carlospolop-forks/Salsa-tools/blob/master/images/imagen8.png)
+![](https://github.com/Hackplayers/Salsa-tools/blob/master/images/imagen8.png)
 
 ### Build the solution
 Select **Output Type = Class Library** (Project --> SalseoLoader Properties --> Application --> Output type = Class Library)
 
-![](https://github.com/carlospolop-forks/Salsa-tools/blob/master/images/imagen9.png)
+![](https://github.com/Hackplayers/Salsa-tools/blob/master/images/imagen9.png)
 
 Select **x64 platform** (Project --> SalseoLoader Properties --> Build --> Platform target = x64)
 
-![](https://github.com/carlospolop-forks/Salsa-tools/blob/master/images/imagen10.png)
+![](https://github.com/Hackplayers/Salsa-tools/blob/master/images/imagen10.png)
 
 To **build** the solution: Build --> Build Solution (Inside the Output console the path of the new DLL will appear)
 
