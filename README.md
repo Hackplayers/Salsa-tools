@@ -14,7 +14,7 @@ Salsa Tools is a collection of three different tools that combined, allows you t
 
 
 ## Features
-    * TCP/UDP/ICMP/DNS/BIND     
+    * TCP/UDP/ICMP/DNS/BIND/SSL     
     * AV Safe (17th February)
     * AMSI patchers
     * PowerShell execution 
