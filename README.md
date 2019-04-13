@@ -125,7 +125,7 @@ SalseoLoader is in charge of loading the encrypted payload. Can be both compiled
 
 [+] Shells availables:
 
-    [-] ReverseTCP  [-] ReverseDNS   [-] ReverseSSL [-] Shellcodes
+    [-] ReverseTCP  [-] ReverseDNS   [-] ReverseSSL [-] Shellcode
     [-] ReverseUDP  [-] ReverseICMP  [-] BindTCP
 ```
 
