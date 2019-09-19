@@ -32,6 +32,8 @@ And his behavior is as it follows:
 ## Setup
 ### Requirements
  - Visual Studio 2017 (or similar)
+ 	- Microsoft.PowerShell.3.ReferenceAssemblies dependencies compiling in .NET 4.0
+	- Microsoft.PowerShell.2.ReferenceAssemblies dependencies compiling in .NET 3.5
  - Python 2.7       
 ### Running la Salsa
 #### Cooking EvilSalsa
