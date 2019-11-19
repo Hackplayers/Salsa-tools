@@ -22,10 +22,10 @@ banner = """
 				by: CyberVaca@HackPlayers
 """
 
-print banner
+print(banner)
 
 if len(sys.argv) != 4:
-    print "Usage: %s <FILE> <PASSWORD> <OUTPUT_FILE>" % (sys.argv[0])
+    print("Usage: {!s} <FILE> <PASSWORD> <OUTPUT_FILE>".format((sys.argv[0])))
     sys.exit(0)
 
 FILE = sys.argv[1]
@@ -80,12 +80,12 @@ def gzipstream ( string ):
 datos = lee_archivo(FILE)
 key = [ord(char) for char in PASSWORD]
 encriptado = crypt (PASSWORD, datos)
-print "Password: " + PASSWORD
-print "RC4 Key: " + str(key)
+print("Password: ", PASSWORD)
+print("RC4 Key: {!s}".format(key))
 bytearray_encriptado = encriptado
 hex_encriptado = ByteToHex(bytearray_encriptado)
 payload_encriptado = gzipstream(hex_encriptado)
-print "File Output: " + OUTPUT
+print("File Output: ", OUTPUT)
 write_archivo(OUTPUT, payload_encriptado)
 
 
